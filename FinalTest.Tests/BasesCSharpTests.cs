@@ -1,5 +1,4 @@
-﻿using System;
-using NFluent;
+﻿using NFluent;
 using NUnit.Framework;
 
 namespace FinalTest.Tests
@@ -53,47 +52,19 @@ namespace FinalTest.Tests
             Check.That(somme.Calculer("2+3")).IsEqualTo(5);
         }
 
-        //[Test]
-        //public void DéfinirUneInterfaceStrategieAvec2ImplémentationsPrécédentesPasséesEnParamètreDUneClasseCliente()
-        //{
-        //    var multiplication = new Multiplication();
-        //    var somme = new Somme();
-
-        //    // La classe Calculatrice ne doit pas analyser l'opération reçue dans la méthode Calculer, elle doit s'appuyer sur les 2 implémentations passées en paramètre du constructeur
-        //    var calculatrice = new Calculatrice(new IOperation[] { multiplication, somme });
-        //    var resultatSomme = calculatrice.Calculer("1+2");
-        //    var resultatProduit = calculatrice.Calculer("2*3");
-
-        //    Check.That(resultatProduit).IsEqualTo(6);
-        //    Check.That(resultatSomme).IsEqualTo(3);
-        //}
-    }
-
-    public class Somme
-    {
-        public Somme()
+        [Test]
+        public void DéfinirUneInterfaceStrategieAvec2ImplémentationsPrécédentesPasséesEnParamètreDUneClasseCliente()
         {
-        }
+            var multiplication = new Multiplication();
+            var somme = new Somme();
 
-        public bool PeutCalculer(string value)
-        {
-            if (value.Substring(1, 1) != "+")
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
+            // La classe Calculatrice ne doit pas analyser l'opération reçue dans la méthode Calculer, elle doit s'appuyer sur les 2 implémentations passées en paramètre du constructeur
+            var calculatrice = new Calculatrice(new IOperation[] { multiplication, somme });
+            var resultatSomme = calculatrice.Calculer("1+2");
+            var resultatProduit = calculatrice.Calculer("2*3");
 
-        public int Calculer(string value)
-        {
-            int value1 = int.Parse(value.Substring(0, 1));
-            int value2 = int.Parse(value.Substring(2, 1));
-            int result = value1+value2;
-            return result;
-
+            Check.That(resultatProduit).IsEqualTo(6);
+            Check.That(resultatSomme).IsEqualTo(3);
         }
     }
 }
