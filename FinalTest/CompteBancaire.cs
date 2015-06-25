@@ -11,6 +11,11 @@ namespace FinalTest.Tests
             this.numCompte = compteCréé.NumeroDeCompte;
         }
 
+        public CompteBancaire(CompteCréé compteCréé, DépotRéalisé dépotRéalisé)
+        {
+            throw new NotImplementedException();
+        }
+
         public static IEnumerable<IEvenementMetier> Ouvrir(string numéroDeCompte, int autorisationDeCrédit)
         {
             yield return new CompteCréé(numéroDeCompte, autorisationDeCrédit);
@@ -19,6 +24,11 @@ namespace FinalTest.Tests
         public IEnumerable<IEvenementMetier> FaireUnDepot(Montant montantDepot, DateTime dateDepot)
         {
             yield return new DépotRéalisé(numCompte, montantDepot, dateDepot);
+        }
+
+        public IEnumerable<IEvenementMetier> FaireUnRetrait(Montant montantRetrait, DateTime dateRetrait)
+        {
+            yield return new RetraitRéalisé(numCompte, montantRetrait, dateRetrait);
         }
     }
 }
