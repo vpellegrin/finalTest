@@ -33,15 +33,15 @@ namespace FinalTest.Tests
             Check.That(typeof(TypeReference).IsValueType).IsFalse();
         }
 
-        //[Test]
-        //public void DéfinirUneClasseRealisantUneMultiplication()
-        //{
-        //    var multiplication = new Multiplication();
+        [Test]
+        public void DéfinirUneClasseRealisantUneMultiplication()
+        {
+            var multiplication = new Multiplication();
 
-        //    Check.That(multiplication.PeutCalculer("2*3")).IsTrue();
-        //    Check.That(multiplication.PeutCalculer("2+3")).IsFalse();
-        //    Check.That(multiplication.Calculer("2*3")).IsEqualTo(6);
-        //}
+            Check.That(multiplication.PeutCalculer("2*3")).IsTrue();
+            Check.That(multiplication.PeutCalculer("2+3")).IsFalse();
+            Check.That(multiplication.Calculer("2*3")).IsEqualTo(6);
+        }
 
         //[Test]
         //public void DéfinirUneClasseRealisantUneSomme()
@@ -69,29 +69,31 @@ namespace FinalTest.Tests
         //}
     }
 
-    public class TypeReference
+    public class Multiplication
     {
-        private int i;
-        public TypeReference(int i)
+        public Multiplication()
         {
-            this.i = i;
         }
 
-        // override object.Equals
-        public override bool Equals(object obj)
+        public bool PeutCalculer(string value)
         {
-            if (obj == null || GetType() != obj.GetType())
+            if (value.Substring(1, 1) != "*")
             {
                 return false;
             }
+            else
+            {
+                return true;
+            }
+        }
 
-            TypeReference typeReferenceObj = obj as TypeReference;
+        public int Calculer(string value)
+        {
+            int value1 = int.Parse(value.Substring(0, 1));
+            int value2 = int.Parse(value.Substring(2, 1));
+            int result = value1*value2;
+            return result;
 
-            if (typeReferenceObj.i != this.i) return false;
-
-            return true;
-
-            
         }
     }
 }
