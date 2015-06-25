@@ -43,15 +43,15 @@ namespace FinalTest.Tests
             Check.That(multiplication.Calculer("2*3")).IsEqualTo(6);
         }
 
-        //[Test]
-        //public void DéfinirUneClasseRealisantUneSomme()
-        //{
-        //    var somme = new Somme();
+        [Test]
+        public void DéfinirUneClasseRealisantUneSomme()
+        {
+            var somme = new Somme();
 
-        //    Check.That(somme.PeutCalculer("2+3")).IsTrue();
-        //    Check.That(somme.PeutCalculer("2*3")).IsFalse();
-        //    Check.That(somme.Calculer("2+3")).IsEqualTo(5);
-        //}
+            Check.That(somme.PeutCalculer("2+3")).IsTrue();
+            Check.That(somme.PeutCalculer("2*3")).IsFalse();
+            Check.That(somme.Calculer("2+3")).IsEqualTo(5);
+        }
 
         //[Test]
         //public void DéfinirUneInterfaceStrategieAvec2ImplémentationsPrécédentesPasséesEnParamètreDUneClasseCliente()
@@ -69,15 +69,15 @@ namespace FinalTest.Tests
         //}
     }
 
-    public class Multiplication
+    public class Somme
     {
-        public Multiplication()
+        public Somme()
         {
         }
 
         public bool PeutCalculer(string value)
         {
-            if (value.Substring(1, 1) != "*")
+            if (value.Substring(1, 1) != "+")
             {
                 return false;
             }
@@ -91,7 +91,7 @@ namespace FinalTest.Tests
         {
             int value1 = int.Parse(value.Substring(0, 1));
             int value2 = int.Parse(value.Substring(2, 1));
-            int result = value1*value2;
+            int result = value1+value2;
             return result;
 
         }
