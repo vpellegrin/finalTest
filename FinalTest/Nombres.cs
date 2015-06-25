@@ -14,5 +14,9 @@ namespace FinalTest.Tests
 
         public IEnumerable<int> NombresPairs { get {  return value.Where(x => (x.Value%2) == 0).Select(x => x.Value); } }
         public String TexteNombresImpairs { get { return value.OrderBy(x => x.Value).Where(x => (x.Value % 2) != 0).Select(x => x.Key).Aggregate(String.Empty, (s, s1) => s + ", " + s1).Substring(2); } }
+        public String PremierNombreDontLeTexteContientPlusDe5Caractères { get
+        {
+            return value.Select(x => x.Key).First(x => x.Length > 5);
+        } }
     }
 }
