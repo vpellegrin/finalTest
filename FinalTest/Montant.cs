@@ -9,5 +9,10 @@ namespace FinalTest.Tests
         {
             this.value = i;
         }
+
+        public int Value
+        {
+            get { return value; }
+        }
     }
 }

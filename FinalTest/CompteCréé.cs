@@ -16,6 +16,11 @@
             get { return _numeroDeCompte; }
         }
 
+        public int AutorisationDeCrédit
+        {
+            get { return _autorisationDeCrédit; }
+        }
+
         public override string ToString()
         {
             return string.Format("NumeroDeCompte: {0}, AutorisationDeCrédit: {1}", _numeroDeCompte, _autorisationDeCrédit);

@@ -6,6 +6,8 @@ namespace FinalTest.Tests
     public class CompteBancaire
     {
         private readonly string numCompte;
+        private CompteCréé unCompteCréé;
+        private int balance = 0;
         public CompteBancaire(CompteCréé compteCréé)
         {
             this.numCompte = compteCréé.NumeroDeCompte;
@@ -13,7 +15,7 @@ namespace FinalTest.Tests
 
         public CompteBancaire(CompteCréé compteCréé, DépotRéalisé dépotRéalisé)
         {
-            throw new NotImplementedException();
+            balance += dépotRéalisé.MontantDepot.Value;
         }
 
         public static IEnumerable<IEvenementMetier> Ouvrir(string numéroDeCompte, int autorisationDeCrédit)
@@ -29,6 +31,11 @@ namespace FinalTest.Tests
         public IEnumerable<IEvenementMetier> FaireUnRetrait(Montant montantRetrait, DateTime dateRetrait)
         {
             yield return new RetraitRéalisé(numCompte, montantRetrait, dateRetrait);
+            if (this.unCompteCréé.AutorisationDeCrédit < (this.balance - montantRetrait.Value))
+            {
+                yield return new BalanceNégativeDétectée(numCompte, montantRetrait, dateRetrait);
+                
+            }
         }
     }
 }
