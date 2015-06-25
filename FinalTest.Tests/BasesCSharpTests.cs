@@ -23,15 +23,15 @@ namespace FinalTest.Tests
             Check.That(typeof(TypeValeur).IsValueType).IsTrue();
         }
 
-        //[Test]
-        //public void DéfinirUnTypeRéférenceAvecEgalitéDeuxInstancesAyantLesMêmesPropriétés()
-        //{
-        //    var valeur1 = new TypeReference(12);
-        //    var valeur2 = new TypeReference(12);
+        [Test]
+        public void DéfinirUnTypeRéférenceAvecEgalitéDeuxInstancesAyantLesMêmesPropriétés()
+        {
+            var valeur1 = new TypeReference(12);
+            var valeur2 = new TypeReference(12);
 
-        //    Check.That(valeur1).IsEqualTo(valeur2);
-        //    Check.That(typeof(TypeReference).IsValueType).IsFalse();
-        //}
+            Check.That(valeur1).IsEqualTo(valeur2);
+            Check.That(typeof(TypeReference).IsValueType).IsFalse();
+        }
 
         //[Test]
         //public void DéfinirUneClasseRealisantUneMultiplication()
@@ -69,13 +69,29 @@ namespace FinalTest.Tests
         //}
     }
 
-    public struct TypeValeur
+    public class TypeReference
     {
-
-        private int value; 
-        public TypeValeur(int i)
+        private int i;
+        public TypeReference(int i)
         {
-            this.value = i;
+            this.i = i;
+        }
+
+        // override object.Equals
+        public override bool Equals(object obj)
+        {
+            if (obj == null || GetType() != obj.GetType())
+            {
+                return false;
+            }
+
+            TypeReference typeReferenceObj = obj as TypeReference;
+
+            if (typeReferenceObj.i != this.i) return false;
+
+            return true;
+
+            
         }
     }
 }
