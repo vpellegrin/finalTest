@@ -31,10 +31,12 @@ namespace FinalTest.Tests
         public IEnumerable<IEvenementMetier> FaireUnRetrait(Montant montantRetrait, DateTime dateRetrait)
         {
             yield return new RetraitRéalisé(numCompte, montantRetrait, dateRetrait);
+
             if (this.unCompteCréé.AutorisationDeCrédit < (this.balance - montantRetrait.Value))
             {
                 yield return new BalanceNégativeDétectée(numCompte, montantRetrait, dateRetrait);
-                
+                throw new RetraitNonAutorisé();
+
             }
         }
     }

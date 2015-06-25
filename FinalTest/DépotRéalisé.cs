@@ -20,11 +20,6 @@ namespace FinalTest.Tests
             get { return montantDepot; }
         }
 
-        public override string ToString()
-        {
-            return string.Format("NumeroDeCompte: {0}, MontantDepot: {1}, DateDepot: {2}", numeroDeCompte, montantDepot, dateDepot);
-        }
-
         // override object.Equals
         public override bool Equals(object obj)
         {
