@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using NFluent;
 using NUnit.Framework;
 
@@ -20,16 +19,16 @@ namespace FinalTest.Tests
             Check.That(evenements).ContainsExactly(new CompteCréé(_numéroDeCompte, autorisationDeCrédit));
         }
 
-        //[Test]
-        //public void EtantDonnéUnCompteBancaireFaireUnDepotProduitUnEvenement()
-        //{
-        //    var compteBancaire = new CompteBancaire(new CompteCréé(_numéroDeCompte, 0)); // Event Sourcing avec un seul événement
-        //    var montantDepot = new Montant(10);
-        //    var dateDepot = DateTime.Now;
-        //    var evenements = compteBancaire.FaireUnDepot(montantDepot, dateDepot); // retourne un IEnumerable<IEvenementMetier> contenant l'événement DepotRealisé
+        [Test]
+        public void EtantDonnéUnCompteBancaireFaireUnDepotProduitUnEvenement()
+        {
+            var compteBancaire = new CompteBancaire(new CompteCréé(_numéroDeCompte, 0)); // Event Sourcing avec un seul événement
+            var montantDepot = new Montant(10);
+            var dateDepot = DateTime.Now;
+            var evenements = compteBancaire.FaireUnDepot(montantDepot, dateDepot); // retourne un IEnumerable<IEvenementMetier> contenant l'événement DepotRealisé
 
-        //    Check.That(evenements).ContainsExactly(new DépotRéalisé(_numéroDeCompte, montantDepot, dateDepot));
-        //}
+            Check.That(evenements).ContainsExactly(new DépotRéalisé(_numéroDeCompte, montantDepot, dateDepot));
+        }
 
         //[Test]
         //public void EtantDonnéUnCompteBancaireFaireUnRetraitAvecProvisionSuffisanteProduitUnEvenement()
@@ -90,50 +89,5 @@ namespace FinalTest.Tests
         //        return Synthèses.First(x => x.NuméroDeCompte == numeroDeCompte);
         //    }
         //}
-    }
-
-    public class CompteCréé : IEvenementMetier
-    {
-        private string numeroDeCompte;
-        private int autorisationDeCrédit;
-        public CompteCréé(string numéroDeCompte, int autorisationDeCrédit)
-        {
-            this.numeroDeCompte = numeroDeCompte;
-            this.autorisationDeCrédit = autorisationDeCrédit;
-            
-        }
-
-        // override object.Equals
-        public override bool Equals(object obj)
-        {
-
-            if (obj == null || GetType() != obj.GetType())
-            {
-                return false;
-            }
-
-            CompteCréé compteCreeObj = obj as CompteCréé;
-
-            if (compteCreeObj.numeroDeCompte != this.numeroDeCompte) return false;
-            if (compteCreeObj.autorisationDeCrédit != this.autorisationDeCrédit) return false;
-
-            return true;
-            
-        }
-
-    }
-
-    public class CompteBancaire
-    {
-
-        public static IEnumerable<IEvenementMetier> Ouvrir(string numéroDeCompte, int autorisationDeCrédit)
-        {
-            yield return new CompteCréé(numéroDeCompte, autorisationDeCrédit);
-        }
-    }
-
-    public interface IEvenementMetier
-    {
-
     }
 }

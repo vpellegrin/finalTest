@@ -2,13 +2,23 @@
 {
     public class CompteCréé : IEvenementMetier
     {
-        private string numeroDeCompte;
-        private int autorisationDeCrédit;
+        private string _numeroDeCompte;
+        private int _autorisationDeCrédit;
         public CompteCréé(string numéroDeCompte, int autorisationDeCrédit)
         {
-            this.numeroDeCompte = numeroDeCompte;
-            this.autorisationDeCrédit = autorisationDeCrédit;
+            _numeroDeCompte = numéroDeCompte;
+            _autorisationDeCrédit = autorisationDeCrédit;
             
+        }
+
+        public string NumeroDeCompte
+        {
+            get { return _numeroDeCompte; }
+        }
+
+        public override string ToString()
+        {
+            return string.Format("NumeroDeCompte: {0}, AutorisationDeCrédit: {1}", _numeroDeCompte, _autorisationDeCrédit);
         }
 
         // override object.Equals
@@ -22,8 +32,8 @@
 
             CompteCréé compteCreeObj = obj as CompteCréé;
 
-            if (compteCreeObj.numeroDeCompte != this.numeroDeCompte) return false;
-            if (compteCreeObj.autorisationDeCrédit != this.autorisationDeCrédit) return false;
+            if (compteCreeObj._numeroDeCompte != this._numeroDeCompte) return false;
+            if (compteCreeObj._autorisationDeCrédit != this._autorisationDeCrédit) return false;
 
             return true;
             
